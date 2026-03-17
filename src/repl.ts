@@ -1,4 +1,6 @@
 import { createInterface } from "readline";
+import { getCommands } from "./commands.js";
+import { commandExit } from "./command_exit.js";
 
 export function cleanInput(input: string): string[] {
   const splitInput = input.split(" ").filter((word) => word !== "");
@@ -21,7 +23,14 @@ export function startREPL() {
       rl.prompt();
       return;
     }
-    console.log(`Your command was: ${output[0]}`);
+    const getRegistry = getCommands();
+    const cmd = getRegistry[output[0]];
+    if (cmd) {
+      cmd.callback(getRegistry);
+    } else {
+      console.log("Unknown command");
+    }
+
     rl.prompt();
   });
 }

@@ -1,4 +1,5 @@
 import { createInterface } from "readline";
+import { getCommands } from "./commands.js";
 export function cleanInput(input) {
     const splitInput = input.split(" ").filter((word) => word !== "");
     const cleanArray = splitInput.map((word) => word.trim().toLowerCase());
@@ -17,7 +18,14 @@ export function startREPL() {
             rl.prompt();
             return;
         }
-        console.log(`Your command was: ${output[0]}`);
+        const getRegistry = getCommands();
+        const cmd = getRegistry[output[0]];
+        if (cmd) {
+            cmd.callback(getRegistry);
+        }
+        else {
+            console.log("Unknown command");
+        }
         rl.prompt();
     });
 }
