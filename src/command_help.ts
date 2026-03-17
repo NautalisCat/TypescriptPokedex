@@ -1,6 +1,8 @@
-export function commandHelp() {
+import { State } from "./state.js";
+
+export function commandHelp(state: State) {
   console.log("Welcome to the Pokedex!");
-  console.log("Usage: \n");
-  console.log("help: Displays a help message");
-  console.log("exit: Exit the Pokedex");
+  for (const [name, cliObject] of Object.entries(state.commands)) {
+    console.log(`${name}: ${cliObject.description}`);
+  }
 }
