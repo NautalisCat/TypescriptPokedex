@@ -1,5 +1,7 @@
 import { commandExit } from "./command_exit.js";
 import { commandHelp } from "./command_help.js";
+import { commandMap } from "./command_map.js";
+import { commandMapb } from "./command_mapb.js";
 export function getCommands() {
     return {
         exit: {
@@ -12,6 +14,15 @@ export function getCommands() {
             description: "Displays a help message",
             callback: commandHelp,
         },
-        // can add more commands here
+        map: {
+            name: "map",
+            description: "Displays results",
+            callback: commandMap,
+        },
+        mapb: {
+            name: "mapb",
+            description: "Goes back",
+            callback: commandMapb,
+        },
     };
 }
